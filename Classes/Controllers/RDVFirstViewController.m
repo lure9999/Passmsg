@@ -22,8 +22,8 @@
 // THE SOFTWARE.
 
 #import "RDVFirstViewController.h"
-#import "RDVTabBarController.h"
-#import "RDVTabBarItem.h"
+//#import "RDVTabBarController.h"
+//#import "RDVTabBarItem.h"
 
 @implementation RDVFirstViewController
 
@@ -40,18 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [[self rdv_tabBarItem] setBadgeValue:@"3"];
-    
-    if (self.rdv_tabBarController.tabBar.translucent) {
-        UIEdgeInsets insets = UIEdgeInsetsMake(0,
-                                               0,
-                                               CGRectGetHeight(self.rdv_tabBarController.tabBar.frame),
-                                               0);
-        
-        self.tableView.contentInset = insets;
-        self.tableView.scrollIndicatorInsets = insets;
-    }
+   
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -96,7 +85,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [[self rdv_tabBarItem] setBadgeValue:[NSString stringWithFormat:@"%ld", indexPath.row+1]];
 }
 
 @end

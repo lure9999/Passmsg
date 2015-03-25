@@ -1,0 +1,31 @@
+//
+// Prefix header for all source files of the 'myappone' target in the 'myappone' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import "MACROS_P.h"
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+//    #import "ROConnect.h"
+    #import "iToast.h"
+    #import "NetTrans.h"
+    #import "JSONKit.h"
+    #import "UIImageView+WebCache.h"
+#import "MBProgressHUD.h"
+#import "MobClick.h"
+#import <ShareSDK/ShareSDK.h>
+//#import "EXRootViewController.h"
+//#import "WTSListEntity.h"
+#ifdef DEBUG
+#define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#define NSLog(...) {}
+#endif
+
+#endif

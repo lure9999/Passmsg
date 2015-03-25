@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 
 #import "RDVThirdViewController.h"
-#import "RDVTabBarController.h"
+
 #import "RDVDetailsViewController.h"
 
 @implementation RDVThirdViewController
@@ -41,15 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (self.rdv_tabBarController.tabBar.translucent) {
-        UIEdgeInsets insets = UIEdgeInsetsMake(0,
-                                               0,
-                                               CGRectGetHeight(self.rdv_tabBarController.tabBar.frame),
-                                               0);
-        
-        self.tableView.contentInset = insets;
-        self.tableView.scrollIndicatorInsets = insets;
-    }
+ 
 }
 
 - (NSUInteger)supportedInterfaceOrientations {

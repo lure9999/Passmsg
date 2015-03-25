@@ -22,7 +22,6 @@
 // THE SOFTWARE.
 
 #import "RDVSecondViewController.h"
-#import "RDVTabBarController.h"
 
 @implementation RDVSecondViewController
 
@@ -40,15 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (self.rdv_tabBarController.tabBar.translucent) {
-        UIEdgeInsets insets = UIEdgeInsetsMake(0,
-                                               0,
-                                               CGRectGetHeight(self.rdv_tabBarController.tabBar.frame),
-                                               0);
-        
-        self.tableView.contentInset = insets;
-        self.tableView.scrollIndicatorInsets = insets;
-    }
+ 
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
@@ -92,8 +83,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    [[self rdv_tabBarController] setTabBarHidden:!self.rdv_tabBarController.tabBarHidden animated:YES];
+
 }
 
 @end
