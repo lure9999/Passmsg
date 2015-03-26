@@ -445,7 +445,7 @@
 	
 }
 
-- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(float)scale{
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(double)scale{
 			
 	if (scrollView.zoomScale > 1.0f) {		
 		

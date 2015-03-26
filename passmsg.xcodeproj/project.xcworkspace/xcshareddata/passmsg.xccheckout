@@ -12,6 +12,8 @@
 	<dict>
 		<key>0a80d8a4-f182-77d0-8734-ce57b7db7bff</key>
 		<string>https://github.com/lure9999/Passmsg.git</string>
+		<key>19899eee-8a2b-11e1-a0ea-032f8e13f8e4++2440</key>
+		<string>https://github.com/lure9999/Passmsg.git/apps</string>
 		<key>987175C9FD245B86A5EA29D2CD959FD92DB4C502</key>
 		<string>https://github.com/lure9999/Passmsg.git</string>
 	</dict>
@@ -20,9 +22,16 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0a80d8a4-f182-77d0-8734-ce57b7db7bff</key>
+		<string>../../../..</string>
+		<key>19899eee-8a2b-11e1-a0ea-032f8e13f8e4++2440</key>
 		<string>../../..</string>
 		<key>987175C9FD245B86A5EA29D2CD959FD92DB4C502</key>
 		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>19899eee-8a2b-11e1-a0ea-032f8e13f8e4++2440</key>
+		<string>https://github.com/lure9999/Passmsg.git</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/lure9999/Passmsg.git</string>
@@ -36,9 +45,17 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.subversion</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>0a80d8a4-f182-77d0-8734-ce57b7db7bff</string>
+			<string>19899eee-8a2b-11e1-a0ea-032f8e13f8e4++2440</string>
 			<key>IDESourceControlWCCName</key>
 			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0a80d8a4-f182-77d0-8734-ce57b7db7bff</string>
+			<key>IDESourceControlWCCName</key>
+			<string>..</string>
 		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>

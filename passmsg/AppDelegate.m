@@ -18,6 +18,16 @@
 #import <sys/utsname.h>
 #import <ShareSDK/ShareSDK.h>
 
+
+
+
+//5个ROOTVC
+#import "TabOneVC.h"
+#import "TabTwoVC.h"
+#import "TabThreeVC.h"
+#import "TabFourVC.h"
+#import "TabFiveVC.h"
+
 //push存储devicetoken的user default key
 
 
@@ -50,7 +60,7 @@ enum{
 @synthesize _debugWindow;
 @synthesize curStatusBarHeight = _curStatusBarHeight;
 @synthesize isDealingWithoutRefresh;
-
+@synthesize _isFromLogin;
 @synthesize tabBarController;
 @synthesize _isFromShare,_isFromAlipay;
 @synthesize areaStr;
@@ -71,7 +81,7 @@ enum{
     
     _isLaunchNetStatus = 0;
     _isFristLaunch = YES;
-   // [self addVesionControl];
+    // [self addVesionControl];
     //百度地图
     //    _mapManager = [[BMKMapManager alloc] init];
     //    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
@@ -79,7 +89,7 @@ enum{
     //    if (!ret) {
     //        NSLog(@"manager start failed!");
     //    }
-  
+    
     /*--------------- 监测网络情况 -------------*/
     
     self.hostReach = [Reachability reachabilityForInternetConnection];
@@ -89,7 +99,7 @@ enum{
                                                object: nil];
     [self.hostReach startNotifier];
     /*************************友盟统计 start**************************/
-  //  [MobClick startWithAppkey:@"5304111d56240b6f9c090f74"];
+    //  [MobClick startWithAppkey:@"5304111d56240b6f9c090f74"];
     
     /*************************友盟统计 start**************************/
     
@@ -166,68 +176,64 @@ enum{
                                                        nil,nil] forState:UIControlStateSelected];
     
     /* 创建五个viewcontroller */
-    UIViewController *wtsVC = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-    UIViewController *homePageVC = [[UIViewController alloc] initWithCoder:nil];
-    //CouponViewController *couponVC = [[CouponViewController alloc] initWithNibName:nil bundle:nil];
-    UIViewController *couponVC = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-    UIViewController *myVc = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-#ifdef ISIMVERSION
-    UIViewController *IMVC = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-#else
-    UIViewController *viewController4 = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-#endif
-    UIViewController *friendsVC = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-
+    TabOneVC *rootvc1 = [[TabOneVC alloc] initWithNibName:nil bundle:nil];
+    
+    TabTwoVC *rootvc2 = [[TabTwoVC alloc] initWithNibName:nil bundle:nil];
+    TabThreeVC *rootvc3 = [[TabThreeVC alloc] initWithNibName:nil bundle:nil];
+    TabFourVC *rootvc4 = [[TabFourVC alloc] initWithNibName:nil bundle:nil];
+    TabFiveVC *rootvc5 = [[TabFiveVC alloc] initWithNibName:nil bundle:nil];
+    
     /* 创建五个viewcontroller的导航条 */
-    UINavigationController *wtsNav = [[UINavigationController alloc]initWithRootViewController:wtsVC];
-    UINavigationController *homePageNav = [[UINavigationController alloc]initWithRootViewController:homePageVC];
-    UINavigationController *couponNav = [[UINavigationController alloc]initWithRootViewController:couponVC];
-    UINavigationController *myNav = [[UINavigationController alloc]initWithRootViewController:myVc];
-    UINavigationController *imNav = [[UINavigationController alloc]initWithRootViewController:IMVC];
-    UINavigationController *friendNav = [[UINavigationController alloc]initWithRootViewController:friendsVC];
+    UINavigationController *nav1 = [[UINavigationController alloc]initWithRootViewController:rootvc1];
+    UINavigationController *nav2 = [[UINavigationController alloc]initWithRootViewController:rootvc2];
+    UINavigationController *nav3 = [[UINavigationController alloc]initWithRootViewController:rootvc3];
+    UINavigationController *nav4 = [[UINavigationController alloc]initWithRootViewController:rootvc4];
+    UINavigationController *nav5 = [[UINavigationController alloc]initWithRootViewController:rootvc5];
     
     NSDictionary *dictNavTitle = [NSDictionary dictionaryWithObjectsAndKeys:
                                   [UIColor blackColor],UITextAttributeTextColor, //字体颜色
                                   [UIFont boldSystemFontOfSize:20],UITextAttributeFont,//title字体
-                               //   UIOffsetMake(0, 0),UITextAttributeTextShadowOffset,//title的阴影offset
-                                 // RGBCOLOR(246, 246, 246),UITextAttributeTextShadowColor,//title的阴影颜色
+                                  //   UIOffsetMake(0, 0),UITextAttributeTextShadowOffset,//title的阴影offset
+                                  // RGBCOLOR(246, 246, 246),UITextAttributeTextShadowColor,//title的阴影颜色
                                   nil];
-    wtsNav.navigationBar.titleTextAttributes = dictNavTitle;
-    homePageNav.navigationBar.titleTextAttributes = dictNavTitle;
-    couponNav.navigationBar.titleTextAttributes = dictNavTitle;
-    myNav.navigationBar.titleTextAttributes = dictNavTitle;
-    imNav.navigationBar.titleTextAttributes = dictNavTitle;
-    friendNav.navigationBar.titleTextAttributes = dictNavTitle;
+    nav1.navigationBar.titleTextAttributes = dictNavTitle;
+    nav2.navigationBar.titleTextAttributes = dictNavTitle;
+    nav3.navigationBar.titleTextAttributes = dictNavTitle;
+    nav4.navigationBar.titleTextAttributes = dictNavTitle;
+    nav5.navigationBar.titleTextAttributes = dictNavTitle;
     
     if (IOS_VERSION < 7.0)
     {
-        [wtsNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_ios6.png"] forBarMetrics:UIBarMetricsDefault];
-        [homePageNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_ios6.png"] forBarMetrics:UIBarMetricsDefault];
-        [couponNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_ios6.png"] forBarMetrics:UIBarMetricsDefault];
-        [myNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_ios6.png"] forBarMetrics:UIBarMetricsDefault];
-        [imNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_ios6.png"] forBarMetrics:UIBarMetricsDefault];
-        [friendNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_ios6.png"] forBarMetrics:UIBarMetricsDefault];
+        [nav1.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_ios6.png"] forBarMetrics:UIBarMetricsDefault];
+        [nav2.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_ios6.png"] forBarMetrics:UIBarMetricsDefault];
+        [nav3.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_ios6.png"] forBarMetrics:UIBarMetricsDefault];
+        [nav4.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_ios6.png"] forBarMetrics:UIBarMetricsDefault];
+        [nav5.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg_ios6.png"] forBarMetrics:UIBarMetricsDefault];
         
-        wtsNav.navigationBar.clipsToBounds = YES;
-        homePageNav.navigationBar.clipsToBounds = YES;
-        couponNav.navigationBar.clipsToBounds = YES;
-        myNav.navigationBar.clipsToBounds = YES;
-        imNav.navigationBar.clipsToBounds = YES;
-        friendNav.navigationBar.clipsToBounds = YES;
+        
+        nav1.navigationBar.clipsToBounds = YES;
+        nav2.navigationBar.clipsToBounds = YES;
+        nav3.navigationBar.clipsToBounds = YES;
+        nav4.navigationBar.clipsToBounds = YES;
+        nav5.navigationBar.clipsToBounds = YES;
+        
     }
     else
     {
-        [wtsNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
-        [homePageNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
-        [couponNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
-        [myNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
-        [imNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
-        [friendNav.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
+        [nav1.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
+        [nav2.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
+        [nav3.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
+        [nav4.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
+        [nav5.navigationBar setBackgroundImage:[UIImage imageNamed:@"nav_bar_bg.png"] forBarMetrics:UIBarMetricsDefault];
+        
     }
     
     
     /* 将五个NavigationController放到tabbar的数组中 */
-    self.tabBarController.viewControllers = [NSArray arrayWithObjects:/*wtsNav*/homePageNav, couponNav,  imNav, friendNav, myNav, nil];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:nav1,nav2,nav3,nav4,nav5, nil];
+    
+    // self.tabBarController.viewControllers = [NSArray arrayWithObjects:nav1,nav2,nav3, nil];
+    
     self.tabBarController.tabBar.clipsToBounds = YES;
     self.tabBarController.tabBar.selectionIndicatorImage = [UIImage imageNamed:@"tab_selection_Indicator_1X1.png"];
     
@@ -235,21 +241,21 @@ enum{
     revealViewController.frontViewShadowRadius = 5;
     
     //右侧隐藏视图
-   // MyStoreRightViewController *rightViewController = [[MyStoreRightViewController alloc] init];
+    // MyStoreRightViewController *rightViewController = [[MyStoreRightViewController alloc] init];
     //[rightViewController setUserId:nil];
-   // revealViewController.rightViewController = rightViewController;
+    // revealViewController.rightViewController = rightViewController;
     
     //浮动层离右边距的宽度
     revealViewController.rightViewRevealWidth = 220;
     [revealViewController setFrontViewPosition:FrontViewPositionLeft animated:YES];
     
     
-//    MyStoreViewController *vc = (MyStoreViewController*)myVc;
-//    rightViewController._dataTransDelegate = vc;
-//    rightViewController._hideControllerDelegate = revealViewController;
-//    
-//    [vc._rightBtn addTarget:revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
-//    [vc.view addGestureRecognizer:revealViewController.panGestureRecognizer];
+    //    MyStoreViewController *vc = (MyStoreViewController*)myVc;
+    //    rightViewController._dataTransDelegate = vc;
+    //    rightViewController._hideControllerDelegate = revealViewController;
+    //
+    //    [vc._rightBtn addTarget:revealViewController action:@selector(rightRevealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    //    [vc.view addGestureRecognizer:revealViewController.panGestureRecognizer];
     self._swController = revealViewController;
     
     //test tabbar view controller
@@ -274,9 +280,12 @@ enum{
     [self initializePlat];
     
     //sinaweibo
-   
+    
     
     /*监测是否需要自动登陆*//*注释原因：首先判断是否登陆，已经登陆则不需要再登陆，只有在没有登陆的情况才不需要检查是否自动登陆*/
+    
+    // [self.tabBarController setSelectedIndex:TAB_1];
+    
     //    [self checkIfNeedAutoLogin];
     //    [self.tabBarController setSelectedIndex:TAB_GOU_WU_QIANG];
     /*--------------- -------------*/
@@ -296,67 +305,67 @@ enum{
     _isFromActive = YES;
     
     //判断是否登录，并获取跳转的页面
-   // [[NetTrans getInstance] API_APP_ISLOGIN_AND_JUMP_FUNC:self];
+    // [[NetTrans getInstance] API_APP_ISLOGIN_AND_JUMP_FUNC:self];
     
     return YES;
 }
 /*
-#pragma mark ============================== NSNotificationCenter
-
-- (void)postNotofocation{
-    NSLog(@"post table refresh");
-    
-    //发出通知
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh" object:nil userInfo:nil];
-    
-    self._isFromAlipay=0;
-}
-
-- (void)postNotofocation2{
-    NSLog(@"post table refresh2");
-    
-    //发出通知
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh2" object:nil userInfo:nil];
-    
-    //self._isFromAlipay=0;
-}
-
-
-- (void)postNotofocation1{
-    NSLog(@"post page goto ");
-    
-    //发出通知
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh1" object:nil userInfo:nil];
-    
-    self._isFromAlipay=0;
-}
-
-
-
-//支付宝加入
-- (BOOL)isSingleTask{
-    struct utsname name;
-    uname(&name);
-    float version = [[UIDevice currentDevice].systemVersion floatValue];//判定系统版本。
-    if (version < 4.0 || strstr(name.machine, "iPod1,1") != 0 || strstr(name.machine, "iPod2,1") != 0) {
-        return YES;
-    }
-    else {
-        return NO;
-    }
-}
-*/
+ #pragma mark ============================== NSNotificationCenter
+ 
+ - (void)postNotofocation{
+ NSLog(@"post table refresh");
+ 
+ //发出通知
+ [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh" object:nil userInfo:nil];
+ 
+ self._isFromAlipay=0;
+ }
+ 
+ - (void)postNotofocation2{
+ NSLog(@"post table refresh2");
+ 
+ //发出通知
+ [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh2" object:nil userInfo:nil];
+ 
+ //self._isFromAlipay=0;
+ }
+ 
+ 
+ - (void)postNotofocation1{
+ NSLog(@"post page goto ");
+ 
+ //发出通知
+ [[NSNotificationCenter defaultCenter] postNotificationName:@"refresh1" object:nil userInfo:nil];
+ 
+ self._isFromAlipay=0;
+ }
+ 
+ 
+ 
+ //支付宝加入
+ - (BOOL)isSingleTask{
+ struct utsname name;
+ uname(&name);
+ float version = [[UIDevice currentDevice].systemVersion floatValue];//判定系统版本。
+ if (version < 4.0 || strstr(name.machine, "iPod1,1") != 0 || strstr(name.machine, "iPod2,1") != 0) {
+ return YES;
+ }
+ else {
+ return NO;
+ }
+ }
+ */
 -(void)pushUserFriendAction{
     // NSString *strUserId = [NSString stringWithFormat:@"%@", [self._pushData objectForKey:@"id"]];
-    if([self.tabBarController selectedIndex] == TAB_WEI_TONG_SHE)
-    {
-        UINavigationController *controller = (UINavigationController *)self.tabBarController.selectedViewController;
-        
-        [controller popToRootViewControllerAnimated:NO];
-        
-    }
-    [self.tabBarController setSelectedIndex:TAB_WEI_TONG_SHE];
-    
+//    if([self.tabBarController selectedIndex] == TAB_WEI_TONG_SHE)
+//    {
+//        UINavigationController *controller = (UINavigationController *)self.tabBarController.selectedViewController;
+//        
+//        [controller popToRootViewControllerAnimated:NO];
+//        
+//    }
+//    [self.tabBarController setSelectedIndex:TAB_WEI_TONG_SHE];
+//    
     //                 UINavigationController *controller = (UINavigationController *)self.tabBarController.selectedViewController;
     //                TabFourViewController *friend = (TabFourViewController*)controller.topViewController;
     //                [friend showRsView:strUserId];
@@ -398,12 +407,12 @@ enum{
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-   
+    
     
 }
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -412,15 +421,15 @@ enum{
 }
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
- //   [SDWebImageManager.sharedManager.imageCache clearMemory];
- //   [SDWebImageManager.sharedManager.imageCache clearDisk];
+    //   [SDWebImageManager.sharedManager.imageCache clearMemory];
+    //   [SDWebImageManager.sharedManager.imageCache clearDisk];
 }
 #pragma mark - myfunction
 -(void)endWelcome:(id)sender
 {
     [[self.window viewWithTag:1002] removeFromSuperview];
     [[self.window viewWithTag:1001] removeFromSuperview];
-    [self.tabBarController setSelectedIndex:TAB_WEI_TONG_SHE];
+    [self.tabBarController setSelectedIndex:TAB_1];
 }
 -(void)performTransition
 {
@@ -455,7 +464,7 @@ enum{
     }else{
         _isLaunchNetStatus++;
         if([SecurityMethod G_is_login]){
-        
+            
         }
         //        [[NetTrans getInstance] API_user_profile:self UserID:nil];
     }
@@ -471,17 +480,18 @@ enum{
                              redirectUri:kSinaWeiboAppRedirectURI];
     
     // 腾讯微博
+    /*
     [ShareSDK connectTencentWeiboWithAppKey:kTencentWeiboAppKey
                                   appSecret:kTencentWeiboAppSecret
                                 redirectUri:kTencentWeiboAppRedirectURI
                                    wbApiCls:nil];
-    
-       // 微信
+    */
+    // 微信
     [ShareSDK connectWeChatWithAppId:kWeiXinAppKey
                            appSecret:kWeiXinAppSecret
                            wechatCls:[WXApi class]];
     
-
+    
 }
 
 #pragma mark - WeChat delegate method
@@ -505,12 +515,12 @@ enum{
     //    }
     if ([[url absoluteString] hasPrefix:@"wx50b922b0ff031f56://pay"]||[[url absoluteString] hasPrefix:@"myappone://safepay"])
     {////测试 注册支付回调
-       return  [PaySDK application:application openURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:nil];
-    
+        return  [PaySDK application:application openURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:nil];
+        
     }
     else if([[url absoluteString] hasPrefix:@"sinaweibosso.1985482134"])
     {
-       // return [self.sinaweibo handleOpenURL:url];
+        // return [self.sinaweibo handleOpenURL:url];
     }
     else if (_isFromShare || [[url absoluteString] hasPrefix:@"wx50b922b0ff031f56://oauth"]) {
         return [ShareSDK handleOpenURL:url
@@ -526,68 +536,68 @@ enum{
 {
     NSLog(@"handleOpenURL:%@",url);
     if([[url absoluteString] hasPrefix:@"sinaweibosso.1985482134"]){
-       // return   [self.sinaweibo handleOpenURL:url];
+        // return   [self.sinaweibo handleOpenURL:url];
     }
     
     return [ShareSDK handleOpenURL:url wxDelegate:self];
 }
 /*
-- (void)parse:(NSURL *)url application:(UIApplication *)application {
-    
-    //结果处理
-    AlixPayResult* result = [self handleOpenURL:url];
-    
-    if (result)
-    {
-        
-        if (result.statusCode == 9000)
-        {
+ - (void)parse:(NSURL *)url application:(UIApplication *)application {
  
-            // *用公钥验证签名 严格验证请使用
-            //result.resultString与result.signString验签
+ //结果处理
+ AlixPayResult* result = [self handleOpenURL:url];
  
-
-            //交易成功
-            //            NSString* key = @"签约帐户后获取到的支付宝公钥";
-            //			id<DataVerifier> verifier;
-            //            verifier = CreateRSADataVerifier(key);
-            //
-            //			if ([verifier verifyString:result.resultString withSign:result.signString])
-            //            {
-            //                //验证签名成功，交易结果无篡改
-            //			}
-            
-        }
-        else
-        {
-            //交易失败
-        }
-    }
-    else
-    {
-        //失败
-    }
-    
-}
-
-- (AlixPayResult *)resultFromURL:(NSURL *)url {
-    NSString * query = [[url query] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-#if ! __has_feature(objc_arc)
-    return [[[AlixPayResult alloc] initWithResultString:query] autorelease];
-#else
-    return [[AlixPayResult alloc] initWithResultString:query];
-#endif
-}
-
-- (AlixPayResult *)handleOpenURL:(NSURL *)url {
-    AlixPayResult * result = nil;
-    
-    if (url != nil && [[url host] compare:@"safepay"] == 0) {
-        result = [self resultFromURL:url];
-    }
-    
-    return result;
-}
+ if (result)
+ {
+ 
+ if (result.statusCode == 9000)
+ {
+ 
+ // *用公钥验证签名 严格验证请使用
+ //result.resultString与result.signString验签
+ 
+ 
+ //交易成功
+ //            NSString* key = @"签约帐户后获取到的支付宝公钥";
+ //			id<DataVerifier> verifier;
+ //            verifier = CreateRSADataVerifier(key);
+ //
+ //			if ([verifier verifyString:result.resultString withSign:result.signString])
+ //            {
+ //                //验证签名成功，交易结果无篡改
+ //			}
+ 
+ }
+ else
+ {
+ //交易失败
+ }
+ }
+ else
+ {
+ //失败
+ }
+ 
+ }
+ 
+ - (AlixPayResult *)resultFromURL:(NSURL *)url {
+ NSString * query = [[url query] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+ #if ! __has_feature(objc_arc)
+ return [[[AlixPayResult alloc] initWithResultString:query] autorelease];
+ #else
+ return [[AlixPayResult alloc] initWithResultString:query];
+ #endif
+ }
+ 
+ - (AlixPayResult *)handleOpenURL:(NSURL *)url {
+ AlixPayResult * result = nil;
+ 
+ if (url != nil && [[url host] compare:@"safepay"] == 0) {
+ result = [self resultFromURL:url];
+ }
+ 
+ return result;
+ }
  */
 
 -(UIImage *) scaleImage:(UIImage *)image toScale:(float)scaleSize {
@@ -644,17 +654,17 @@ enum{
 {
     UINavigationController *navC = (UINavigationController *)viewController;
     [navC popToRootViewControllerAnimated:NO];
+//    
+//    if (atabBarController.selectedIndex != TAB_GOU_WU_QIANG) {
+//        
+//        BOOL isreture  = [self._swController hideFrontViewRight:YES];
+//        if (isreture) {
+//            [tabBarController setSelectedIndex:TAB_GOU_WU_QIANG];
+//            return;
+//        }
+//    }
     
-    if (atabBarController.selectedIndex != TAB_GOU_WU_QIANG) {
-        
-        BOOL isreture  = [self._swController hideFrontViewRight:YES];
-        if (isreture) {
-            [tabBarController setSelectedIndex:TAB_GOU_WU_QIANG];
-            return;
-        }
-    }
     
- 
     
 }
 
@@ -716,10 +726,10 @@ enum{
         NSString *alerMessage = [message objectForKey:@"alert"];
         self._pushData = [userInfo objectForKey:@"data"];
         
-                    UIAlertView *alertV = [[UIAlertView alloc]initWithTitle:@"消息通知" message:alerMessage  delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-            alertV.tag = ENUM_ALERT_PUSH;
-            [alertV show];
-    
+        UIAlertView *alertV = [[UIAlertView alloc]initWithTitle:@"消息通知" message:alerMessage  delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        alertV.tag = ENUM_ALERT_PUSH;
+        [alertV show];
+        
     }else
     {
         NSString *alerMessage = [message objectForKey:@"alert"];
@@ -750,11 +760,14 @@ enum{
 /* 向服务器申请发送token 判断事前有没有发送过 */
 - (void)registerForRemoteNotificationToGetToken
 {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *strtoken = [userDefaults objectForKey:USER_DEFAULT_PUSH_DEVICE_TOKEN];
-    //  NSLog(@">>>>>>register token::%@",strtoken);
+    
 #ifdef DEBUG_SHOWLOG
     //将debug信息写入文件
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *strtoken = [userDefaults objectForKey:USER_DEFAULT_PUSH_DEVICE_TOKEN];
+    NSLog(@">>>>>>register token::%@",strtoken);
+    
     [DebugInfoFileManager saveDebugInfo:[NSString stringWithFormat:@">>>>>>register token::%@",strtoken]];
 #endif
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -799,7 +812,7 @@ enum{
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     
-  
+    
 }
 /* 设置有无新朋友消息的小红点的显示和隐藏 */
 -(void)setBadgeValue_HaveNewFriend:(BOOL)isHaveNewFriend
@@ -892,42 +905,42 @@ enum{
 -(void)responseSuccessObj:(id)netTransObj nTag:(int)nTag
 {
     if (t_API_VERSION_API == nTag) {
-//        VersionEntiy *version = (VersionEntiy *)netTransObj;
-//        //NSString *verNum = version._version;
-//        
-//        if ([version._update isEqualToString:@"1"]) {
-//            //强制升级
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"监测到您目前用的版本不是新版本" delegate:self cancelButtonTitle:nil otherButtonTitles:@"请下载新版本", nil];
-//            alert.tag = ENUM_ALERT_VERTION_POWER;
-//            [alert show];
-//            
-//        }else if ([version._update isEqualToString:@"2"])
-//        {
-//            //前往appstore下载
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"监测到您目前用的版本不是新版本" delegate:self cancelButtonTitle:@"暂时忽略" otherButtonTitles:@"前往", nil];
-//            alert.tag = ENUM_ALERT_VERTION_UPDATE;
-//            [alert show];
-//        }
+        //        VersionEntiy *version = (VersionEntiy *)netTransObj;
+        //        //NSString *verNum = version._version;
+        //
+        //        if ([version._update isEqualToString:@"1"]) {
+        //            //强制升级
+        //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"监测到您目前用的版本不是新版本" delegate:self cancelButtonTitle:nil otherButtonTitles:@"请下载新版本", nil];
+        //            alert.tag = ENUM_ALERT_VERTION_POWER;
+        //            [alert show];
+        //
+        //        }else if ([version._update isEqualToString:@"2"])
+        //        {
+        //            //前往appstore下载
+        //            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"监测到您目前用的版本不是新版本" delegate:self cancelButtonTitle:@"暂时忽略" otherButtonTitles:@"前往", nil];
+        //            alert.tag = ENUM_ALERT_VERTION_UPDATE;
+        //            [alert show];
+        //        }
         
         
     }else if (t_API_USER_LOGIN_API == nTag){
         /*设置全局是否已经登陆的变量*/
         [SecurityMethod G_set_isLogin:YES];
         
-//        UserDetailInfoEntity *userLoginInfo = (UserDetailInfoEntity *)netTransObj;
-//        [CHKeychain save:KEY_USERSERVICEINFO data:userLoginInfo];
-//        [userLoginInfo updateMainInfo];
-//        NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
-//        [userDefaults setBool:[userLoginInfo._is_rest boolValue] forKey:@"UserLoginUseCaptcha"];
-//        
-//        RefleshManager *refMgr = [RefleshManager sharedRefleshManager];
-    
+        //        UserDetailInfoEntity *userLoginInfo = (UserDetailInfoEntity *)netTransObj;
+        //        [CHKeychain save:KEY_USERSERVICEINFO data:userLoginInfo];
+        //        [userLoginInfo updateMainInfo];
+        //        NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+        //        [userDefaults setBool:[userLoginInfo._is_rest boolValue] forKey:@"UserLoginUseCaptcha"];
+        //
+        //        RefleshManager *refMgr = [RefleshManager sharedRefleshManager];
+        
     }else if (t_API_USER_GET_OTHER_USER_INFO_API == nTag){
-//        [SecurityMethod G_set_isLogin:YES];
-//        UserDetailInfoEntity *userLoginInfo = (UserDetailInfoEntity *)netTransObj;
-//        
-//        [CHKeychain save:KEY_USERSERVICEINFO data:userLoginInfo];
-//        [userLoginInfo updateMainInfo];
+        //        [SecurityMethod G_set_isLogin:YES];
+        //        UserDetailInfoEntity *userLoginInfo = (UserDetailInfoEntity *)netTransObj;
+        //
+        //        [CHKeychain save:KEY_USERSERVICEINFO data:userLoginInfo];
+        //        [userLoginInfo updateMainInfo];
     }
     
     if (nTag == t_API_APP_ISLOGIN_AND_JUMP )
@@ -938,7 +951,7 @@ enum{
         
         //是否登录
         
-       
+        
     }
 }
 -(void)addVesionControl
