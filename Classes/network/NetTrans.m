@@ -9,7 +9,7 @@
 #import "NetTrans.h"
 #import "NetTransObj.h"
 #import "Reachability.h"
-
+#import "MessageEntity.h"
 
 static NetTrans* trans = nil;
 
@@ -210,4 +210,30 @@ static NetTrans* trans = nil;
 //#define API_USER_GET_SALT_API             @"v3/user/getsalt"                               /* 请求盐 */
 // 调用登陆后盐立即失效，每次调用登陆接口前需要重新调用盐接口
 
+
+
+-(void)API_get_msg_list:(id)transdel PageIndex:(NSInteger)pageIndex Limit:(NSInteger)limit{
+    NSString *requestName = API_GET_MES_LIST;
+    NSString *requestPort = BASEURLHOST;
+    
+    MessageListTrans *webTrans = [[MessageListTrans alloc]init:transdel nITag:t_API_GET_MES_LIST nApi:t_API_GET_MES_LIST ];
+    NSString* strurl= [NSString stringWithFormat:@"%@://%@/%@",BASEURLSCHEME,requestPort,requestName];
+    webTrans.requst = [self post:strurl];
+    if(webTrans.requst == nil)
+    {
+        return;
+    }
+    
+    webTrans.requst.delegate = webTrans;
+    
+    /* set param */
+    
+    [webTrans.requst setPostValue:@"getmsg" forKey:@"action"];
+    
+    [webTrans.requst setPostValue:[NSString stringWithFormat:@"%ld",(long)pageIndex] forKey:@"page"];
+    [webTrans.requst setPostValue:[NSString stringWithFormat:@"%ld",(long)limit] forKey:@"limit"];
+    
+    [arrReq addObject:webTrans];
+    [webTrans.requst startAsynchronous];
+}
 @end

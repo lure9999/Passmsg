@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TabOneVC : UIViewController
+#import "EX_refreshAndLoadMoreTableView.h"
 
+//所有优惠券列表
+@interface TabOneVC  : EXRootViewController<UITableViewDataSource, UITableViewDelegate, EX_refreshAndLoadMoreTableViewDelegate,UIScrollViewDelegate>
+{
+    EX_refreshAndLoadMoreTableView* _tableView;
+}
+@property(nonatomic,strong)EX_refreshAndLoadMoreTableView* _tableView;
 @end

@@ -23,37 +23,16 @@
 //宏定义来控制开发地址还是正式地址
 //#define PRODUCT_HOST
 /**********************地址配置 start**********************/
-#ifdef PRODUCT_HOST
-
-#define PUSHURLHOST          @"v5.msservices.mystore.com.cn"         //push的消息个数数字显示正式地址
-#define HTTPSCERNAME     @"mystorehttps"
-
-#define BASEURLHOST       @"roseapi.mystore.com.cn/v229"          //API调用正式地址
-#define HTTPSURLHOST        @"roseapi.mystore.com.cn/v229" //@"new.wdpay.mystore.com.cn"                 //https:调用https
-
-#define TWO_DIMEN_CODE_URL   @"http://h5.mystore.com.cn/register?"   //二维码头部定义的识别字符串正式地址
-#define H5BASEURLHOST        @"http://h5.mystore.com.cn/"            //H5界面的基础地址
-#define H5XUNZHANGBASEURLHOST        @"http://m.mystore.com.cn/"
-#else /*PRODUCT_HOST*/
-
 #define PUSHURLHOST          @"newtest.msservices.mystore.com.cn"      //push的消息个数数字显示测试地址
 #define HTTPSCERNAME     @"mystorehttps_test"  //HTTPS证书
 
-//#define BASEURLHOST          @"v229test.roseapi.mystore.com.cn" //
-#define BASEURLHOST          @"testapi.mystore.com.cn/v230"        //API调用测试地址
-#define HTTPSURLHOST @"testapi.mystore.com.cn/v230"
-//#define HTTPSURLHOST         @"63.t.mystore.com.cn"
+#define BASEURLHOST          @"passmsg.sinaapp.com" //
 
-#define TWO_DIMEN_CODE_URL   @"http://test.m.mystore.com.cn/register?"//二维码头部定义的识别字符串测试地址
-
-#define H5BASEURLHOST      @"http://test.h5.mystore.com.cn/" // @"http://test.m.mystore.com.cn/"         //H5界面的基础地址
-#define H5XUNZHANGBASEURLHOST        @"http://t27.mystore.com.cn/"
-
-#endif /*PRODUCT_HOST*/
+/*PRODUCT_HOST*/
 /**********************地址配置 end**********************/
 
 //宏定义来控制BASEURLHOST使用https协议还是http协议
-#define BASEURL_HTTPS_PROTOCOL
+//#define BASEURL_HTTPS_PROTOCOL
 
 #ifdef BASEURL_HTTPS_PROTOCOL
 #define BASEURLSCHEME          @"https"

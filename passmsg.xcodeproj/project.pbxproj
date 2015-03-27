@@ -169,6 +169,7 @@
 		0027FCD71AC29B660089171E /* UIImageView+CardImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0027FB2C1AC29B650089171E /* UIImageView+CardImageView.m */; };
 		0027FCD81AC29B660089171E /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027FB2E1AC29B650089171E /* libMobClickLibrary.a */; };
 		0027FCD91AC29B660089171E /* libUPPayPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027FB311AC29B650089171E /* libUPPayPlugin.a */; };
+		005C172B1AC4E992001EB1F7 /* MessageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 005C172A1AC4E992001EB1F7 /* MessageEntity.m */; };
 		00D56FD91AC25D4B005E8B76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D56FD81AC25D4B005E8B76 /* main.m */; };
 		00D5702B1AC26365005E8B76 /* RDVDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D5700D1AC26365005E8B76 /* RDVDetailsViewController.m */; };
 		00D5702C1AC26365005E8B76 /* RDVFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D5700F1AC26365005E8B76 /* RDVFirstViewController.m */; };
@@ -542,6 +543,8 @@
 		0027FB311AC29B650089171E /* libUPPayPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUPPayPlugin.a; sourceTree = "<group>"; };
 		0027FB321AC29B650089171E /* UPPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPlugin.h; sourceTree = "<group>"; };
 		0027FB331AC29B650089171E /* UPPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPluginDelegate.h; sourceTree = "<group>"; };
+		005C17291AC4E992001EB1F7 /* MessageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageEntity.h; sourceTree = "<group>"; };
+		005C172A1AC4E992001EB1F7 /* MessageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageEntity.m; sourceTree = "<group>"; };
 		00D56FD31AC25D4B005E8B76 /* passmsg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = passmsg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00D56FD71AC25D4B005E8B76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00D56FD81AC25D4B005E8B76 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1501,6 +1504,15 @@
 			path = waterflow;
 			sourceTree = "<group>";
 		};
+		005C17281AC4E961001EB1F7 /* DataEntity */ = {
+			isa = PBXGroup;
+			children = (
+				005C17291AC4E992001EB1F7 /* MessageEntity.h */,
+				005C172A1AC4E992001EB1F7 /* MessageEntity.m */,
+			);
+			path = DataEntity;
+			sourceTree = "<group>";
+		};
 		00D56FCA1AC25D4B005E8B76 = {
 			isa = PBXGroup;
 			children = (
@@ -1553,6 +1565,7 @@
 		00D570061AC26365005E8B76 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				005C17281AC4E961001EB1F7 /* DataEntity */,
 				00F1CB7E1AC3A9A200286E5B /* RootVC */,
 				002702911AC2AA5E0089171E /* network */,
 				0027027D1AC2A99C0089171E /* Macro_G */,
@@ -1903,6 +1916,7 @@
 				0027FCA01AC29B650089171E /* SDWebImageDownloader.m in Sources */,
 				0027FC8F1AC29B650089171E /* TSPopoverTouchView.m in Sources */,
 				002702781AC2A9070089171E /* ManuleViewController.m in Sources */,
+				005C172B1AC4E992001EB1F7 /* MessageEntity.m in Sources */,
 				0027FC9E1AC29B650089171E /* SDWebImageCompat.m in Sources */,
 				002702891AC2A99C0089171E /* RefleshManager.m in Sources */,
 				00F1CB811AC3A9E200286E5B /* TabOneVC.m in Sources */,
